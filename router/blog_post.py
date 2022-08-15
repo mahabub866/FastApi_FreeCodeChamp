@@ -1,16 +1,22 @@
 from enum import Enum
 from fastapi import APIRouter, status, Response, Query, Body, Path
-from typing import List, Optional, Union
+from typing import Dict, List, Optional, Union
 from pydantic import BaseModel
 
 router = APIRouter(prefix='/blog', tags=['blog'])
 
+class Image(BaseModel):
+    url:str
+    alias:str
 
 class BlogModel(BaseModel):
     title: str
     content: str
     published: Optional[bool]
     nb_comment: int
+    tags:List[str]=[]
+    metadata:Dict[str,str]={'key1':"Val1"}
+    image:Optional[Image]=None
 
 
 @router.post('/new')
