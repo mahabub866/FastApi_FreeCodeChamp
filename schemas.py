@@ -27,8 +27,8 @@ class UserDisplay(BaseModel):
 # user inside article display
 class User(BaseModel):
     id:int
-    username:int
-    class Config:
+    username:str
+    class Config():
         orm_mode = True
 
 class ArticleBase(BaseModel):
