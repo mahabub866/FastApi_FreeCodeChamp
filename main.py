@@ -8,11 +8,12 @@ from fastapi.exceptions import HTTPException
 from fastapi import FastAPI, Query, Path,status,Response,Request
 from pydantic import BaseModel
 from exceptions import StoryException
-from router import blog_get,blog_post,user,article,product
+from router import blog_get,blog_post,user,article,product,file
 from auth import authentication
 from db.database import engine
 from db import models
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 app = FastAPI()
 
 
@@ -22,6 +23,7 @@ app.include_router(user.router)
 app.include_router(article.router)
 app.include_router(product.router)
 app.include_router(authentication.router)
+app.include_router(file.router)
 
 
 
@@ -47,6 +49,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount('/files',StaticFiles(directory="files"),name='files')
 
 # class Item(BaseModel):
 #     name: str
