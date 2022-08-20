@@ -11,8 +11,9 @@ router=APIRouter(prefix='/blog',tags=['blog'])
 def get_all_blog(page=1, page_size: Optional[int] = None,req_parameter:dict=Depends(required_functionality)):
     return {"message": f"all {page_size} blogs on page {page}",'req':req_parameter}
 
-@router.get("/{id}",status_code=status.HTTP_200_OK,
 
+
+@router.get("/{id}",status_code=status.HTTP_200_OK,
 summary='Individual Blog',
 description='This api Call individual id fetching data',
 response_description='The list of availabe blog'

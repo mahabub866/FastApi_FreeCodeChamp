@@ -7,7 +7,8 @@ bcrypt
 python-multipart
 python-jose
 aiofiles
-
+requests
+pytest
 # gunicorn for development
 gunicorn
 

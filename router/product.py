@@ -1,9 +1,11 @@
 from enum import Enum
+import time 
 from fastapi import APIRouter, status, Response,Form, Query, Body, Path, Depends, Header, Cookie
 from typing import Dict, List, Optional, Union
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
 from sqlalchemy.orm.session import Session
+from custom_log import log
 from db.database import get_db
 from db import db_article
 from schemas import ArticleBase, ArticleDisplay
@@ -14,7 +16,9 @@ router = APIRouter(
 
 )
 products = ['watch', 'camera', 'phone']
-
+async def time_consuming_functionality():
+    time.sleep(5)
+    return 'ok'
 @router.post('/new')
 def create_product(name:str=Form(...)):
     products.append(name)
@@ -24,8 +28,7 @@ def create_product(name:str=Form(...)):
 def get_products(response: Response,
                  custom_header: Optional[List[str]] = Header(None),
                  text_cookie: Optional[str] = Cookie(None)):
-
-
+    log("MyAPI","Call to get all products")             
     if custom_header:
         response.headers['custome_response_header'] = " and ".join(custom_header)
         return {'data': products,
@@ -34,7 +37,8 @@ def get_products(response: Response,
 
 
 @router.get('/all')
-def get_all_product():
+async def get_all_product():
+    await time_consuming_functionality()
     data = " ".join(products)
     respone = Response(content=data, media_type='text/plain')
     respone.set_cookie(key='test_cookie', value="cookie value test")
