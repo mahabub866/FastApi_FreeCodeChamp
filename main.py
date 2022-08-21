@@ -11,6 +11,7 @@ from fastapi import FastAPI, Query, Path,status,Response,Request
 from pydantic import BaseModel
 from exceptions import StoryException
 from router import blog_get,blog_post,user,article,product,file
+from router import dependencies
 from auth import authentication
 from db.database import engine
 from db import models
@@ -26,6 +27,7 @@ app.include_router(article.router)
 app.include_router(product.router)
 app.include_router(authentication.router)
 app.include_router(file.router)
+app.include_router(dependencies.router)
 
 
 
