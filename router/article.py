@@ -32,10 +32,10 @@ def get_articles(id: int, db: Session = Depends(get_db), current_user: UserBase 
 # def get_articles(db:Session=Depends(get_db)):
 #     return db_article.get_article_s(db)
 
-# # read 5article or 10article
-# @router.get('/specific-article',response_model=List[ArticleDisplay])
-# def get_article_specific(page_num:int=1,page_size:int=5,db:Session=Depends(get_db)):
-#     return db_article.get_specifi_article(db,page_num,page_size)
+# read 5article or 10article
+@router.get('/specific-article',response_model=List[ArticleDisplay])
+def get_article_specific(page_num:int=1,page_size:int=5,db:Session=Depends(get_db)):
+    return db_article.get_specifi_article(db,page_num,page_size)
 
 
 # # update
