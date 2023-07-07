@@ -10,7 +10,7 @@ from fastapi.exceptions import HTTPException
 from fastapi import FastAPI, Query, Path,status,Response,Request
 from pydantic import BaseModel
 from exceptions import StoryException
-from router import blog_get,blog_post,user,article,product,file
+from router import blog_get,blog_post, count,user,product,file
 from router import dependencies
 from auth import authentication
 from db.database import engine
@@ -20,14 +20,14 @@ from fastapi.staticfiles import StaticFiles
 app = FastAPI()
 
 
-app.include_router(blog_get.router)
-app.include_router(blog_post.router)
+# app.include_router(blog_get.router)
+# app.include_router(blog_post.router)
 app.include_router(user.router)
-app.include_router(article.router)
-app.include_router(product.router)
+app.include_router(count.count_router)
+# app.include_router(product.router)
 app.include_router(authentication.router)
-app.include_router(file.router)
-app.include_router(dependencies.router)
+# app.include_router(file.router)
+# app.include_router(dependencies.router)
 
 
 
